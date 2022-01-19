@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { Hero } from '../components/Hero';
 
 export default function Home() {
   return (
@@ -11,7 +12,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className='ml-10'>Hello</h1>
+        <Hero />
       </main>
     </div>
   );

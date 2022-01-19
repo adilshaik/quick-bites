@@ -23,7 +23,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Popover className='w-full fixed bg-white top-0 left-0 dark:bg-gray-800'>
+    <Popover className='w-full fixed bg-white top-0 left-0 dark:bg-gray-800 z-10'>
       <div className='max-w-full mx-auto shadow-md sm:px-6'>
         <div className='flex justify-between items-center py-5 md:justify-start md:space-x-10'>
           <div className='flex justify-start lg:w-0 lg:flex-1'>

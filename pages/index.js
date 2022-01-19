@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Featured from '../components/Featured';
 import { Hero } from '../components/Hero';
 
 export default function Home() {
@@ -12,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <Hero />
+        <Featured />
       </main>
     </div>
   );

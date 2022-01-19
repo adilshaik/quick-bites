@@ -41,7 +41,7 @@ const Navbar = () => {
           <Popover.Group as='nav' className='hidden md:flex space-x-10'>
             {navigation.map((item) => (
               <Link key={item.id} href={item.href}>
-                <span className='cursor-pointer text-lg font-medium text-gray-500 hover:text-gray-900'>
+                <span className='cursor-pointer text-lg font-medium text-gray-500 hover:text-gray-900 dark:text-white dark:hover:text-gray-400'>
                   {item.name}
                 </span>
               </Link>
@@ -96,7 +96,7 @@ const Navbar = () => {
                   />
                 </div>
                 <div className='-mr-2'>
-                  <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
+                  <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 '>
                     <span className='sr-only'>Close menu</span>
                     <XIcon className='h-6 w-6' aria-hidden='true' />
                   </Popover.Button>
@@ -107,7 +107,7 @@ const Navbar = () => {
               <div className='grid grid-cols-2 gap-y-4 gap-x-8'>
                 {navigation.map((item) => (
                   <Link key={item.id} href={item.href}>
-                    <span className='cursor-pointer text-lg font-medium text-gray-900 hover:text-gray-70'>
+                    <span className='cursor-pointer text-lg font-medium text-gray-900 hover:text-gray-70 dark:text-white dark:hover:text-gray-400'>
                       {item.name}
                     </span>
                   </Link>

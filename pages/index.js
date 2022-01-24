@@ -2,8 +2,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Featured from '../components/Featured';
 import { Hero } from '../components/Hero';
+import ProductsList from '../components/ProductsList';
+import axios from 'axios';
 
-export default function Home() {
+export default function Home({ products }) {
   return (
     <div>
       <Head>
@@ -14,7 +16,74 @@ export default function Home() {
 
       <main>
         <Featured />
+        <ProductsList products={products} />
       </main>
     </div>
   );
+}
+
+// export async function getServerSideProps(context) {
+//   const products = [
+//     {
+//       _id: '61ef07efe1a06406e5550c16',
+//       title: 'Pizza2',
+//       description: 'Pizza2',
+//       image: '/img/pizza.png',
+//       prices: [12, 13, 14],
+//       extraOptions: [
+//         {
+//           text: 'Mayoneese',
+//           price: 12,
+//           _id: '61ef07efe1a06406e5550c17',
+//         },
+//       ],
+//       createdAt: '2022-01-24T20:11:27.418Z',
+//       updatedAt: '2022-01-24T20:11:27.418Z',
+//       __v: 0,
+//     },
+//     {
+//       _id: '61ef0827e1a06406e5550c21',
+//       title: 'Pizza1',
+//       description: 'Pizza1',
+//       image: '/img/pizza.png',
+//       prices: [12, 13, 14],
+//       extraOptions: [
+//         {
+//           text: 'Mayoneese',
+//           price: 12,
+//           _id: '61ef0827e1a06406e5550c22',
+//         },
+//         {
+//           text: 'Garlic Sauce',
+//           price: 50,
+//           _id: '61ef0827e1a06406e5550c23',
+//         },
+//       ],
+//       createdAt: '2022-01-24T20:12:23.392Z',
+//       updatedAt: '2022-01-24T20:12:23.392Z',
+//       __v: 0,
+//     },
+//   ];
+//   return {
+//     props: {
+//       products: products,
+//     },
+//   };
+// }
+
+export async function getServerSideProps(context) {
+  const res = await fetch(`http://localhost:3000/api/products`);
+  const data = await res.json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      products: data,
+    },
+  };
 }

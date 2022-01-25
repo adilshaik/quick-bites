@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 const ProductsList = ({ products }) => {
   return (
-    <div id='#products' className='bg-white'>
+    <div id='products' className='bg-white'>
       <div className='max-w-2xl mx-auto px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8 '>
         <div className='mt-5 mb-14'>
           <h2 className='text-4xl text-center font-extrabold tracking-tight text-gray-900'>

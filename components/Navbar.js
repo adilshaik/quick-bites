@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useTheme } from 'next-themes';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
 import {
   BsFillCartFill,
   BsFillMoonStarsFill,
@@ -20,8 +21,8 @@ const navigation = [
 ];
 
 const Navbar = () => {
+  const quantity = useSelector((state) => state.cart.quantity);
   const { theme, setTheme } = useTheme();
-
   return (
     <Popover className='w-full fixed bg-white top-0 left-0 dark:bg-gray-800 z-10'>
       <div className='max-w-full mx-auto shadow-md sm:px-6'>
@@ -66,7 +67,7 @@ const Navbar = () => {
               </a>
             </Link>
             <span className='w-7 text-center rounded-full bg-black text-white relative font-bold text-lg -top-4 -left-2'>
-              0
+              {quantity}
             </span>
           </div>
         </div>

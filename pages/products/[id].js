@@ -1,12 +1,8 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { RadioGroup } from '@headlessui/react';
-import { StarIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartSlice';
 
 const index = ({ product }) => {
   const [price, setPrice] = useState(product.prices[0]);
@@ -79,7 +75,7 @@ const index = ({ product }) => {
                 Product options
               </h3>
 
-              <form>
+              <div>
                 {/* Size */}
                 <div>
                   <h4 className='text-lg tracking-wide font-lg font-bold text-gray-900 font-medium'>
@@ -183,14 +179,13 @@ const index = ({ product }) => {
                     className='w-16 h-10 border-2 rounded-sm focus:border-gray-500'
                   />
                   <button
-                    type='submit'
                     onClick={handleClick}
                     className='ml-4 w-40 bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none'
                   >
                     Add to cart
                   </button>
                 </div>
-              </form>
+              </div>
             </section>
           </div>
         </div>

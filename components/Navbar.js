@@ -31,7 +31,13 @@ const Navbar = () => {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <a href='#'>
               <span className='sr-only'>Quick Bites</span>
-              <Image className='h-8 w-auto sm:h-10' src='/favicon.ico' alt='' />
+              <Image
+                width={50}
+                height={50}
+                className='h-8 w-auto sm:h-10'
+                src='/favicon.ico'
+                alt=''
+              />
             </a>
           </div>
           <div className='-mr-2 -my-2 md:hidden'>
@@ -92,6 +98,8 @@ const Navbar = () => {
               <div className='flex items-center justify-between'>
                 <div>
                   <Image
+                    width={50}
+                    height={50}
                     className='h-8 w-auto'
                     src='/favicon.ico'
                     alt='Quick Bites'

@@ -30,7 +30,7 @@ const Navbar = () => {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <a href='#'>
               <span className='sr-only'>Quick Bites</span>
-              <img className='h-8 w-auto sm:h-10' src='favicon.ico' alt='' />
+              <img className='h-8 w-auto sm:h-10' src='/favicon.ico' alt='' />
             </a>
           </div>
           <div className='-mr-2 -my-2 md:hidden'>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 <div>
                   <img
                     className='h-8 w-auto'
-                    src='favicon.ico'
+                    src='/favicon.ico'
                     alt='Quick Bites'
                   />
                 </div>

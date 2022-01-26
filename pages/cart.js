@@ -9,10 +9,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { reset } from '../redux/cartSlice';
 import axios from 'axios';
+import OrderDetail from '../components/OrderDetail';
 
 const cart = () => {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+  const [cash, setCash] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -211,7 +213,10 @@ const cart = () => {
         </div>
         {open ? (
           <>
-            <button className='w-full border-2 mt-5 py-2 bg-white text-black font-semibold uppercase rounded-sm hover:bg-gray-200'>
+            <button
+              onClick={() => setCash(!cash)}
+              className='w-full border-2 mt-5 py-2 bg-white text-black font-semibold uppercase rounded-sm hover:bg-gray-200'
+            >
               Cash On Delivery
             </button>
             <div
@@ -240,6 +245,9 @@ const cart = () => {
           </button>
         )}
       </div>
+      {cash && (
+        <OrderDetail cash={cash} total={cart.total} createOrder={createOrder} />
+      )}
     </div>
   );
 };

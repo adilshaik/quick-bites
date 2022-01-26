@@ -1,4 +1,5 @@
-const form = require('@tailwindcss/aspect-ratio');
+const aspect = require('@tailwindcss/aspect-ratio');
+const form = require('@tailwindcss/forms');
 
 module.exports = {
   darkMode: 'class',
@@ -9,5 +10,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [form],
+  plugins: [form, aspect],
 };

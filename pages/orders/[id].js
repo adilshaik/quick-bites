@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-const index = () => {
-  const status = 0;
+const index = ({ order }) => {
+  const status = order.status;
 
   const statusClass = (index) => {
     if (index - status < 1) return '';
@@ -54,16 +55,16 @@ const index = () => {
                 <tbody className='bg-white divide-y divide-gray-200'>
                   <tr key=''>
                     <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      12356718212121
+                      {order._id}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      John Doe
+                      {order.customerName}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Address
+                      {order.address}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Rs.80
+                      {order.total}
                     </td>
                   </tr>
                 </tbody>
@@ -171,15 +172,15 @@ const index = () => {
         <div className='flex flex-col'>
           <div className='my-1'>
             <span className='font-semibold'>Subtotal: </span>
-            <span className='ml-2'>Rs.0</span>
+            <span className='ml-2'>{order.total}</span>
           </div>
           <div className='my-1'>
             <span className='font-semibold'>Discount: </span>
-            <span className='ml-2'>Rs.0</span>
+            <span className='ml-2'>0</span>
           </div>
           <div className='my-1'>
             <span className='font-semibold'>Total: </span>
-            <span className='ml-2'>Rs.0</span>
+            <span className='ml-2'>{order.total}</span>
           </div>
         </div>
         <button className='w-full mt-5 py-2 bg-white text-black font-semibold uppercase rounded-sm hover:bg-gray-200'>
@@ -213,6 +214,15 @@ const index = () => {
       </style>
     </div>
   );
+};
+
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  return {
+    props: {
+      order: res.data,
+    },
+  };
 };
 
 export default index;

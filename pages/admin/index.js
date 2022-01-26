@@ -1,7 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import axios from 'axios';
 
-const index = () => {
+const Index = ({ products, orders }) => {
+  const [productList, setProductList] = useState(products);
+  const [orderList, setOrderList] = useState(orders);
+  const status = ['preparing', 'on the way', 'delivered'];
+
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/api/products/${id}`
+      );
+      setProductList(
+        productList.filter((product) => {
+          product._id !== id;
+        })
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeStatus = async (id) => {
+    const item = orderList.filter((order) => order._id === id)[0];
+    const currentStatus = item.status;
+    try {
+      const res = await axios.put(`http://localhost:3000/api/orders/${id}`, {
+        status: currentStatus + 1,
+      });
+      setOrderList([
+        res.data,
+        ...orderList.filter((order) => order._id !== id),
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className='flex justift-between flex-wrap overflow-hidden'>
       <div className='w-2/5 mx-5 flex flex-1 flex-col'>
@@ -44,37 +80,45 @@ const index = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
-                  <tr key=''>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <Image
-                        width={40}
-                        height={40}
-                        src='/img/pizza.png'
-                        alt=''
-                      />
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      3121
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Title
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Rs.40
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      <div className='flex'>
-                        <button className='mr-5 border px-2 rounded-md bg-blue-400 text-white hover:bg-blue-500'>
-                          Edit
-                        </button>
-                        <button className='border px-2 rounded-md bg-red-600 text-white hover:bg-red-700'>
-                          Delete
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                {productList.map((product) => (
+                  <tbody
+                    key={product._id}
+                    className='bg-white divide-y divide-gray-200'
+                  >
+                    <tr>
+                      <td className='px-6 py-4 whitespace-nowrap'>
+                        <Image
+                          width={40}
+                          height={40}
+                          src={product.image}
+                          alt=''
+                        />
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {product._id.slice(0, 5)}...
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {product.title}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {product.prices[0]}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        <div className='flex'>
+                          <button className='mr-5 border px-2 rounded-md bg-blue-400 text-white hover:bg-blue-500'>
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(product._id)}
+                            className='border px-2 rounded-md bg-red-600 text-white hover:bg-red-700'
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
               </table>
             </div>
           </div>
@@ -126,35 +170,42 @@ const index = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
-                  <tr key=''>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <Image
-                        width={40}
-                        height={40}
-                        src='/img/pizza.png'
-                        alt=''
-                      />
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      89213..
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      John Doe
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Rs.50
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      Paid
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
-                      <button className='bg-gray-200 px-2 rounded-md hover:bg-gray-300'>
-                        Next Stage
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
+                {orderList.map((order) => (
+                  <tbody
+                    key={order._id}
+                    className='bg-white divide-y divide-gray-200'
+                  >
+                    <tr>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {order._id.slice(0, 5)}...
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {order.customerName}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {order.total}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {order.method === 0 ? (
+                          <span>Cash</span>
+                        ) : (
+                          <span>Paid</span>
+                        )}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        {status[order.status]}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-md font-semibold text-gray-700'>
+                        <button
+                          onClick={() => handleChangeStatus(order._id)}
+                          className='bg-gray-200 px-2 rounded-md hover:bg-gray-300'
+                        >
+                          Next Stage
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                ))}
               </table>
             </div>
           </div>
@@ -164,4 +215,16 @@ const index = () => {
   );
 };
 
-export default index;
+export const getStaticProps = async () => {
+  const productRes = await axios.get('http://localhost:3000/api/products');
+  const orderRes = await axios.get('http://localhost:3000/api/orders');
+
+  return {
+    props: {
+      orders: orderRes.data,
+      products: productRes.data,
+    },
+  };
+};
+
+export default Index;

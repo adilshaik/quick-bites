@@ -11,7 +11,7 @@ import { reset } from '../redux/cartSlice';
 import axios from 'axios';
 import OrderDetail from '../components/OrderDetail';
 
-const cart = () => {
+const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [cash, setCash] = useState(false);
@@ -50,7 +50,7 @@ const cart = () => {
           currency: currency,
         },
       });
-    }, [currency, showSpinner]);
+    }, [dispatch, options, currency, showSpinner]);
 
     return (
       <>
@@ -252,4 +252,4 @@ const cart = () => {
   );
 };
 
-export default cart;
+export default Cart;

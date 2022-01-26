@@ -9,6 +9,7 @@ import {
   BsFillSunFill,
 } from 'react-icons/bs';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -30,7 +31,7 @@ const Navbar = () => {
           <div className='flex justify-start lg:w-0 lg:flex-1'>
             <a href='#'>
               <span className='sr-only'>Quick Bites</span>
-              <img className='h-8 w-auto sm:h-10' src='/favicon.ico' alt='' />
+              <Image className='h-8 w-auto sm:h-10' src='/favicon.ico' alt='' />
             </a>
           </div>
           <div className='-mr-2 -my-2 md:hidden'>
@@ -90,7 +91,7 @@ const Navbar = () => {
             <div className='pt-5 pb-6 px-5'>
               <div className='flex items-center justify-between'>
                 <div>
-                  <img
+                  <Image
                     className='h-8 w-auto'
                     src='/favicon.ico'
                     alt='Quick Bites'
@@ -107,7 +108,7 @@ const Navbar = () => {
             <div className='py-6 px-5 space-y-6'>
               <div className='grid grid-cols-2 gap-y-4 gap-x-8'>
                 {navigation.map((item) => (
-                  <Link key={item.id} href={item.href}>
+                  <Link key={item.id} href={item.href} passHref>
                     <span className='cursor-pointer text-lg font-medium text-gray-900 hover:text-gray-70 dark:text-white dark:hover:text-gray-400'>
                       {item.name}
                     </span>

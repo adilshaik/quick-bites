@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../redux/cartSlice';
 
-const index = ({ product }) => {
+const Index = ({ product }) => {
   const [price, setPrice] = useState(product.prices[0]);
   const [size, setSize] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -206,4 +206,4 @@ export const getServerSideProps = async ({ params }) => {
   };
 };
 
-export default index;
+export default Index;

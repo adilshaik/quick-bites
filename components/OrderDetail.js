@@ -58,7 +58,7 @@ const OrderDetail = ({ cash, createOrder, total }) => {
                     as='h3'
                     className='text-xl font-semibold leading-6 font-medium text-gray-900'
                   >
-                    You'll pay {total} after delivery
+                    You will pay {total} after delivery
                   </Dialog.Title>
                   <form>
                     <div className='overflow-hidden sm:rounded-md'>

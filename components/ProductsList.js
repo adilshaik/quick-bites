@@ -16,7 +16,7 @@ const ProductsList = ({ products }) => {
         </div>
         <div className='mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-6'>
           {products.map((product) => (
-            <Link key={product._id} href={`products/${product._id}`}>
+            <Link key={product._id} href={`products/${product._id}`} passHref>
               <div className='p-2 group relative'>
                 <div className='w-full pt-2 min-h-72 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 h-72 lg:aspect-none'>
                   <Image
